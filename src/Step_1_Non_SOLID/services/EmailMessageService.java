@@ -2,6 +2,7 @@ package Step_1_Non_SOLID.services;
 
 import Step_1_Non_SOLID.models.EmailMessage;
 import Step_1_Non_SOLID.models.SmsMessage;
+import Step_1_Non_SOLID.models.TelegramMessage;
 
 import java.util.regex.Pattern;
 
@@ -18,6 +19,11 @@ public class EmailMessageService implements MessageService{
         }else{
             throw new IllegalArgumentException("Email Address is Not Correct!");
         }
+    }
+
+    @Override
+    public void sendTelegramMessage(TelegramMessage telegramMessage) {
+        //Empty Body
     }
 
     public boolean validateEmailAddress(String email) {

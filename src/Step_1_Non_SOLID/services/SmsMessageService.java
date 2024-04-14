@@ -2,6 +2,7 @@ package Step_1_Non_SOLID.services;
 
 import Step_1_Non_SOLID.models.EmailMessage;
 import Step_1_Non_SOLID.models.SmsMessage;
+import Step_1_Non_SOLID.models.TelegramMessage;
 
 public class SmsMessageService implements MessageService{
     @Override
@@ -15,6 +16,11 @@ public class SmsMessageService implements MessageService{
 
     @Override
     public void sendEmailMessage(EmailMessage emailMessage) {
+        //Empty Body!
+    }
+
+    @Override
+    public void sendTelegramMessage(TelegramMessage telegramMessage) {
         //Empty Body!
     }
 
