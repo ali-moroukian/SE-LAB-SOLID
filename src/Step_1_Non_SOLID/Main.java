@@ -3,9 +3,11 @@ package Step_1_Non_SOLID;
 import Step_1_Non_SOLID.models.EmailMessage;
 import Step_1_Non_SOLID.models.Message;
 import Step_1_Non_SOLID.models.SmsMessage;
+import Step_1_Non_SOLID.models.TelegramMessage;
 import Step_1_Non_SOLID.services.EmailMessageService;
 import Step_1_Non_SOLID.services.MessageService;
 import Step_1_Non_SOLID.services.SmsMessageService;
+import Step_1_Non_SOLID.services.TelegramMessageService;
 
 import java.util.Scanner;
 
@@ -23,6 +25,7 @@ public class Main {
 
             System.out.println("In order to send Sms message enter 1");
             System.out.println("In order to send Email message enter 2");
+            System.out.println("In order to send Telegram message enter 3");
             System.out.println("In order to Exit, Enter 0");
 
             userAnswer= scanner.nextInt();
@@ -58,6 +61,19 @@ public class Main {
                     emailMessage.setContent(content);
                     message = emailMessage;
                     break;
+                case 3:
+                    TelegramMessage telegramMessage = new TelegramMessage();
+                    System.out.print("Enter source telegramId : ");
+                    source = scanner.next();
+                    telegramMessage.setSourceTelegramId(source);
+                    System.out.print("Enter target telegramId : ");
+                    target = scanner.next();
+                    telegramMessage.setTargetTelegramId(target);
+                    System.out.println("Write Your Message : ");
+                    content = scanner.next();
+                    telegramMessage.setContent(content);
+                    message = telegramMessage;
+                    break;
             }
 
             if(message instanceof SmsMessage){
@@ -66,6 +82,9 @@ public class Main {
             }else if(message instanceof EmailMessage){
                 messageService = new EmailMessageService();
                 messageService.sendEmailMessage((EmailMessage) message);
+            } else if(message instanceof TelegramMessage){
+                messageService = new TelegramMessageService();
+                messageService.sendTelegramMessage((TelegramMessage) message);
             }
 
         }while (true);
