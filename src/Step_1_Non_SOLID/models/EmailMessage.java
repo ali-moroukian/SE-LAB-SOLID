@@ -1,4 +1,4 @@
-package edu.sharif.selab.models;
+package Step_1_Non_SOLID.models;
 
 public class EmailMessage extends Message{
     private String sourceEmailAddress;

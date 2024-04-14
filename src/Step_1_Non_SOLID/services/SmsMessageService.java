@@ -1,7 +1,7 @@
-package edu.sharif.selab.services;
+package Step_1_Non_SOLID.services;
 
-import edu.sharif.selab.models.EmailMessage;
-import edu.sharif.selab.models.SmsMessage;
+import Step_1_Non_SOLID.models.EmailMessage;
+import Step_1_Non_SOLID.models.SmsMessage;
 
 public class SmsMessageService implements MessageService{
     @Override

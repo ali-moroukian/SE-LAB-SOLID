@@ -1,9 +1,11 @@
-import edu.sharif.selab.models.EmailMessage;
-import edu.sharif.selab.models.Message;
-import edu.sharif.selab.models.SmsMessage;
-import edu.sharif.selab.services.EmailMessageService;
-import edu.sharif.selab.services.MessageService;
-import edu.sharif.selab.services.SmsMessageService;
+package Step_1_Non_SOLID;
+
+import Step_1_Non_SOLID.models.EmailMessage;
+import Step_1_Non_SOLID.models.Message;
+import Step_1_Non_SOLID.models.SmsMessage;
+import Step_1_Non_SOLID.services.EmailMessageService;
+import Step_1_Non_SOLID.services.MessageService;
+import Step_1_Non_SOLID.services.SmsMessageService;
 
 import java.util.Scanner;
 
