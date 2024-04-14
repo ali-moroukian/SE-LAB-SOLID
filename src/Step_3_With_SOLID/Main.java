@@ -1,8 +1,6 @@
 package Step_3_With_SOLID;
 
-import Step_3_With_SOLID.models.EmailMessage;
 import Step_3_With_SOLID.models.Message;
-import Step_3_With_SOLID.models.SmsMessage;
 import Step_3_With_SOLID.services.EmailMessageService;
 import Step_3_With_SOLID.services.MessageService;
 import Step_3_With_SOLID.services.SmsMessageService;
@@ -11,63 +9,72 @@ import java.util.Scanner;
 
 public class Main {
     public static final Scanner scanner = new Scanner(System.in);
+    private static final int SMS_ID = 1;
+    private static final int EMAIL_ID = 2;
+
+
     public static void main(String[] args) {
         System.out.println("Hello and Welcome to SE Lab Messenger.");
-        int userAnswer=0;
-        do{
-            Message message = null;
-            MessageService messageService;
-            String source;
-            String target;
-            String content;
+        int userAnswer = 0;
+        do {
 
-            System.out.println("In order to send Sms message enter 1");
-            System.out.println("In order to send Email message enter 2");
+            System.out.println("In order to send Sms message enter " + SMS_ID);
+            System.out.println("In order to send Email message enter " + EMAIL_ID);
             System.out.println("In order to Exit, Enter 0");
 
-            userAnswer= scanner.nextInt();
+            userAnswer = scanner.nextInt();
 
-            if(userAnswer==0){
+            if (userAnswer == 0) {
                 break;
             }
 
-            switch (userAnswer){
-                case 1:
-                    SmsMessage smsMessage = new SmsMessage();
-                    System.out.print("Enter source phone : ");
-                    source = scanner.next();
-                    smsMessage.setSourcePhoneNumber(source);
-                    System.out.print("Enter target phone : ");
-                    target = scanner.next();
-                    smsMessage.setTargetPhoneNumber(target);
-                    System.out.println("Write Your Message : ");
-                    content = scanner.next(".*$");
-                    smsMessage.setContent(content);
-                    message = smsMessage;
-                    break;
-                case 2:
-                    EmailMessage emailMessage = new EmailMessage();
-                    System.out.print("Enter source phone : ");
-                    source = scanner.next();
-                    emailMessage.setSourceEmailAddress(source);
-                    System.out.print("Enter target phone : ");
-                    target = scanner.next();
-                    emailMessage.setTargetEmailAddress(target);
-                    System.out.println("Write Your Message : ");
-                    content = scanner.next();
-                    emailMessage.setContent(content);
-                    message = emailMessage;
-                    break;
-            }
+            Message message = new Message();
 
-            if(message instanceof SmsMessage){
-                messageService = new SmsMessageService();
-                messageService.sendSmsMessage((SmsMessage) message);
-            }else if(message instanceof EmailMessage){
-                messageService = new EmailMessageService();
-                messageService.sendEmailMessage((EmailMessage) message);
-            }
+            System.out.println(getEnterSourceTitle(userAnswer));
+            String source = scanner.next();
+            message.setSource(source);
 
-        }while (true);
+            System.out.println(getEnterTargetTitle(userAnswer));
+            String target = scanner.next();
+            message.setTarget(target);
+
+            System.out.println("Write Your Message : ");
+            String content = scanner.next();
+            message.setContent(content);
+
+            MessageService messageService = getMessageService(userAnswer);
+            messageService.send(message);
+
+        } while (true);
+    }
+
+    private static String getEnterSourceTitle(int userAnswer) {
+        switch (userAnswer) {
+            case SMS_ID:
+                return "Enter source phone : ";
+            case EMAIL_ID:
+                return "Enter source email : ";
+        }
+        throw new Error("wrong input");
+    }
+
+    private static String getEnterTargetTitle(int userAnswer) {
+        switch (userAnswer) {
+            case SMS_ID:
+                return "Enter target phone : ";
+            case EMAIL_ID:
+                return "Enter target email : ";
+        }
+        throw new Error("wrong input");
+    }
+
+    private static MessageService getMessageService(int userAnswer) {
+        switch (userAnswer) {
+            case SMS_ID:
+                return new SmsMessageService();
+            case EMAIL_ID:
+                return new EmailMessageService();
+        }
+        throw new Error("wrong input");
     }
 }

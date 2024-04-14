@@ -1,23 +1,16 @@
 package Step_3_With_SOLID.services;
 
-import Step_3_With_SOLID.models.EmailMessage;
-import Step_3_With_SOLID.models.SmsMessage;
+import Step_3_With_SOLID.models.Message;
 
 public class SmsMessageService implements MessageService {
     @Override
-    public void sendSmsMessage(SmsMessage smsMessage) {
-        if(validatePhoneNumber(smsMessage.getSourcePhoneNumber()) && validatePhoneNumber(smsMessage.getTargetPhoneNumber())){
-            System.out.println("Sending a SMS from " + smsMessage.getSourcePhoneNumber() + " to " + smsMessage.getTargetPhoneNumber() + " with content : " + smsMessage.getContent());
+    public void send(Message smsMessage) {
+        if(validatePhoneNumber(smsMessage.getSource()) && validatePhoneNumber(smsMessage.getTarget())){
+            System.out.println("Sending a SMS from " + smsMessage.getSource() + " to " + smsMessage.getTarget() + " with content : " + smsMessage.getContent());
         }else{
             throw new IllegalArgumentException("Phone Number is Not Correct!");
         }
     }
-
-    @Override
-    public void sendEmailMessage(EmailMessage emailMessage) {
-        //Empty Body!
-    }
-
 
     private boolean validatePhoneNumber(String phoneNumber) {
         // Check if the phone number is exactly 11 characters long
